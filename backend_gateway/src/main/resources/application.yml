@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://jiangzh:jiangzh123@localhost:8761/eureka/
+
+spring:
+  application:
+    name: cloudgw-service
+  cloud:
+    gateway:
+      routes:
+      - id: jiangzh-predicate
+        uri: "http://www.jd.com"
+        predicates:
+        - JiangzhAfter=2028-01-01
+        filters:
+        - Jiangzh=imooc,jiangzh
+      - id: film-router
+        uri: lb://film-service
+        filters:
+          - RewritePath=/meetingfilm/filmapi/(?<segment>.*), /$\{segment}
+        predicates:
+        - Path=/meetingfilm/filmapi/films/**
+      - id: hystrix-router
+        uri: "http://www.jiangzh-imooc.com"
+        filters:
+          - name: Hystrix
+            args:
+              name: JiangzhHystrix
+              fallbackUri: forward:/myFallback
+        predicates:
+        - Path=/fallback/**
+
+logging:
+  config: classpath:logback.xml

@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://jiangzh:jiangzh123@localhost:8761/eureka/
+
+
+zuul:
+  prefix: "/meetingfilm/"  ## 统一前缀
+  routes:
+    meetingfilm-user:
+      path: /userapi/**
+      serviceId: user-service
+      retryable: true   # 是否允许重试 ， 饿汉模式
+    meetingfilm-cinema:
+      path: /cinemaapi/**
+      serviceId: cinema-service
+      retryable: true
+    meetingfilm-film:
+      path: /filmapi/**
+      serviceId: film-service
+      retryable: true
+    meetingfilm-hall:
+      path: /hallapi/**
+      serviceId: hall-service
+      retryable: true
+
+#  routes:  ## 路由规则
+#    film-service:    ## application.name -> 服务名称 service-id
+#     path: /filmapi/**  # 匹配规则
+#    cinema-service:
+#      path: /cinemaapi/**
+#  sensitive-headers: "imooc"   ## zuul默认会过滤一些头信息，需要进行过滤设置
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+
+logging:
+  config: classpath:logback.xml
+

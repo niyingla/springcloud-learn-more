@@ -1,0 +1,36 @@
+server:
+  port: 7201
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://jiangzh:jiangzh123@localhost:8761/eureka/
+
+spring:
+  application:
+    name: hello-service-consumer
+
+
+ribbon:
+  MaxAutoRetries : 3
+
+hello-service-provider:
+  ribbon:
+    MaxAutoRetries : 3
+
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+logging:
+  config: classpath:logback.xml
+
