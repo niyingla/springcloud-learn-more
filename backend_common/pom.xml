@@ -68,6 +68,7 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
+            <!--java 下面的xml映射到上面的resources 不然打包的时候 java下面的xml识别不到-->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>

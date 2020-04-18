@@ -13,6 +13,9 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * BackendUserApplicationTests 继承标签
+ */
 public class UserTest extends BackendUserApplicationTests {
 
     @Resource

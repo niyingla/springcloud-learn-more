@@ -9,8 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+//配置类
 @Configuration
+//开启事务
 @EnableTransactionManagement
+//扫描mapper目录
 @MapperScan(basePackages = {"com.mooc.meetingfilm.**.dao.mapper"})
 public class MybatisPlusConfig {
 

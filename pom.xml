@@ -30,6 +30,7 @@
         <module>backend_eureka_server</module>
     </modules>
 
+    <!--版本由父工程统一管理-->
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
@@ -182,5 +183,7 @@
             <!-- Mybatis-plus时引入的配置 end -->
         </dependencies>
     </dependencyManagement>
+
+    <!--父工程不需要构建插件 jwt会被打成其他模块引用不能识别的包所以不可以构建-->
 
 </project>
