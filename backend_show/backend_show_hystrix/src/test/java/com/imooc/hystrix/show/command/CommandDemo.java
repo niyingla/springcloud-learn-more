@@ -4,6 +4,7 @@ import com.netflix.hystrix.*;
 import lombok.Data;
 
 /**
+ * Command 测试demo
  * @author : jiangzh
  * @program : com.imooc.hystrix.show.command
  * @description :

@@ -9,6 +9,7 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 /**
+ * ObserveCommand 测试demo
  * @author : jiangzh
  * @program : com.imooc.hystrix.show.command
  * @description :
@@ -20,7 +21,9 @@ public class ObserveCommandDemo extends HystrixObservableCommand<String> {
 
     public ObserveCommandDemo(String name){
         super(Setter
+                //分组取个名字
                 .withGroupKey(HystrixCommandGroupKey.Factory.asKey("ObserveCommandDemo"))
+                //command取个名字
                 .andCommandKey(HystrixCommandKey.Factory.asKey("ObserveCommandKey")));
         this.name = name;
     }
@@ -33,7 +36,7 @@ public class ObserveCommandDemo extends HystrixObservableCommand<String> {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
-                // 业务处理
+                // 多次 业务处理
                 subscriber.onNext("action 1 , name="+name);
                 subscriber.onNext("action 2 , name="+name);
                 subscriber.onNext("action 3 , name="+name);
@@ -41,6 +44,7 @@ public class ObserveCommandDemo extends HystrixObservableCommand<String> {
                 // 业务处理结束
                 subscriber.onCompleted();
             }
+            //进行io处理
         }).subscribeOn(Schedulers.io());
     }
 }
