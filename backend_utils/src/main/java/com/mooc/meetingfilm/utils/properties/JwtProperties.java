@@ -31,6 +31,9 @@ public class JwtProperties {
      */
     private String authPath = "login";
 
+    /**
+     * 随机码 key
+     */
     private String md5Key = "randomKey";
 
     public static String getJwtPrefix() {
