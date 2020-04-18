@@ -3,12 +3,17 @@ server:
 
 eureka:
   instance:
+    #当前实力主机名
     hostname: localhost
+    #是否展示前置ip
     prefer-ip-address: true
   client:
+    #是否自己注册到eureka
     register-with-eureka: false
+    #要不要去注册中心获取其他服务的地址
     fetch-registry: false
   service-url:
+    #注册地址
     defaultZone: http://jiangzh:jiangzh123@localhost:8761/eureka/
 
 spring:

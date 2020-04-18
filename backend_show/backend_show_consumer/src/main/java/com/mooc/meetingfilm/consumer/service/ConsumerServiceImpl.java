@@ -16,22 +16,24 @@ public class ConsumerServiceImpl implements ConsumerServiceAPI{
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private LoadBalancerClient eurekaClient;
 
     @Override
     public String sayHello(String message) {
+        //第一种
         // 准备工作
 //        String hostname = "localhost";
 //        int port = 7101;
 //        String uri = "/provider/sayhello?message="+message;
-
+        //第二种
         // GET Register
 //        ServiceInstance choose = eurekaClient.choose("hello-service-provider");
 
 //        String hostname = choose.getHost();
 //        int port = choose.getPort();
-
+        //第三种
         String uri = "/provider/sayhello?message="+message;
-
         // http://localhost:7101/provider/sayhello?message=hello
         String url = "http://hello-service-provider"+uri;
 
