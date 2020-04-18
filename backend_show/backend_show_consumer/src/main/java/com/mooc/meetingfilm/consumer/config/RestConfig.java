@@ -18,19 +18,21 @@ import org.springframework.web.client.RestTemplate;
 public class RestConfig {
 
     @Bean
-    @LoadBalanced
+    @LoadBalanced //负载均衡支持
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
 
     /**
     * @Description: 负载均衡规则
+     * 使用比较多例如 BestAvailableRule 最快可实现 WeightedResponseTimeRule 响应时间动态平衡
     * @Param: []
     * @return: com.netflix.loadbalancer.IRule
     * @Author: jiangzh
     */
     @Bean
     public IRule iRule(){
+        //随机规则
         return new RoundRobinRule();
 //        return new MyRule();
     }
