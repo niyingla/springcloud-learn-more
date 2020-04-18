@@ -11,12 +11,24 @@ public class JwtProperties {
 
     public static final String JWT_PREFIX = "jwt";
 
+    /**
+     * 请求头字段
+     */
     private String header = "Authorization";
 
+    /**
+     * 加密形式
+     */
     private String secret = "defaultSecret";
 
+    /**
+     * 过期时间
+     */
     private Long expiration = 604800L; // 默认是七天
 
+    /**
+     * 鉴权 颁发jwt路径
+     */
     private String authPath = "login";
 
     private String md5Key = "randomKey";

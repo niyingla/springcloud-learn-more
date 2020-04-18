@@ -109,10 +109,15 @@ public class JwtTokenUtil {
         final Date expirationDate = new Date(createdDate.getTime() + jwtProperties.getExpiration() * 1000);
 
         return Jwts.builder()
+                //设置内容
                 .setClaims(claims)
+                //设置主题
                 .setSubject(subject)
+                //设置创建时间
                 .setIssuedAt(createdDate)
+                //设置失效时间
                 .setExpiration(expirationDate)
+                //设置验签方式 类型     加密形式
                 .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecret())
                 .compact();
     }
@@ -123,8 +128,8 @@ public class JwtTokenUtil {
     public String getRandomKey() {
         return getRandomString(6);
     }
-    
-    
+
+
     private String getRandomString(int length) {
 		    String base = "abcdefghijklmnopqrstuvwxyz0123456789";
 		    Random random = new Random();
@@ -135,5 +140,5 @@ public class JwtTokenUtil {
 		    }
 		    return sb.toString();
 		}
-		
+
 }
