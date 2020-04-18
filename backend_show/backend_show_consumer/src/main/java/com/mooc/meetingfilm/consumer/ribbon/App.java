@@ -50,6 +50,7 @@ public class App {
         System.err.println("changing servers ...");
         Thread.sleep(3000); // 6
         for (int i = 0; i < 5; i++)  {
+            //附带负载均衡去请求
             HttpResponse response = client.executeWithLoadBalancer(request);
             System.err.println("Status code for " + response.getRequestedURI() + "  : " + response.getStatus());
         }

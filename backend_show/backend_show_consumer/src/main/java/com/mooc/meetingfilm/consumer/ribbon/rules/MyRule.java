@@ -5,6 +5,7 @@ import com.netflix.loadbalancer.AbstractLoadBalancerRule;
 import com.netflix.loadbalancer.Server;
 
 /**
+ * allServerList 所有当前服务列表 upServerList 健康当前服务列表
  * @author : jiangzh
  * @program : com.mooc.meetingfilm.consumer.ribbon.rules
  * @description :
@@ -15,7 +16,7 @@ public class MyRule extends AbstractLoadBalancerRule {
 
     @Override
     public Server choose(Object o) {
-        // 灰度发布 10%的流量在新的功能 ~ 90%的流量在旧的功能
+        // 灰度发布 10%的流 量在新的功能 ~ 90%的流量在旧的功能
         // 对10%有没有限制，已经访问过新功能的流量不能再访问旧的功能
 
         // 定义一个新功能的ServerList
