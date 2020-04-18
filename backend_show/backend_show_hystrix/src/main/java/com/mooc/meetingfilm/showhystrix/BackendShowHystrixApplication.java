@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 4 是否开启熔断 否 快速失败
  * 5 信号量是否到达上限 是 快速失败
  * 6 执行业务逻辑 超时 快速失败
- * 
+ *
  */
 @SpringBootApplication
 public class BackendShowHystrixApplication {

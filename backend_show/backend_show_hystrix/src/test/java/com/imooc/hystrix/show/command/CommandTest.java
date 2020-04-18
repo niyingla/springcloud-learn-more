@@ -23,7 +23,7 @@ public class CommandTest {
 
         CommandDemo commandDemo = new CommandDemo("execute");
 
-        // 同步执行Command
+        // 同步执行Command 全流程执行134567 run只执行一步
         String result = commandDemo.execute();
 
         long endTime = System.currentTimeMillis();
@@ -37,6 +37,7 @@ public class CommandTest {
 
         CommandDemo commandDemo = new CommandDemo("queue");
 
+        //异步执行
         Future<String> queue = commandDemo.queue();
 
         long endTime = System.currentTimeMillis();
@@ -55,28 +56,38 @@ public class CommandTest {
         long beginTime = System.currentTimeMillis();
 
         CommandDemo commandDemo = new CommandDemo("observe");
-
+        //观察对象 可执行多次
         Observable<String> observe = commandDemo.observe();
 
-        // 阻塞式调用
+        // 阻塞式调用 单独执行 可能主线程已经退出
         String result = observe.toBlocking().single();
 
         long endTime = System.currentTimeMillis();
         System.out.println("result="+result+" , speeding="+(endTime-beginTime));
 
-
         // 非阻塞式调用
         observe.subscribe(new Subscriber<String>() {
+            /**
+             * 编译时
+             */
             @Override
             public void onCompleted() {
                 System.err.println("observe , onCompleted");
             }
 
+            /**
+             * 报错时
+             * @param throwable
+             */
             @Override
             public void onError(Throwable throwable) {
                 System.err.println("observe , onError - throwable="+throwable);
             }
 
+            /**
+             * 执行后 处理逻辑 result 就是之前处理的返回值
+             * @param result
+             */
             @Override
             public void onNext(String result) {
                 long endTime = System.currentTimeMillis();
@@ -92,6 +103,7 @@ public class CommandTest {
 
         CommandDemo commandDemo1 = new CommandDemo("toObservable1");
 
+        //只能执行一次
         Observable<String> toObservable1 = commandDemo1.toObservable();
 
         // 阻塞式调用
