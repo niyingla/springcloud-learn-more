@@ -4,7 +4,7 @@ import com.netflix.hystrix.*;
 import lombok.Data;
 
 /**
- * Command 测试demo
+ * Command 测试demo 隔离线程 执行一次
  * @author : jiangzh
  * @program : com.imooc.hystrix.show.command
  * @description :

@@ -9,7 +9,7 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 /**
- * ObserveCommand 测试demo
+ * ObserveCommand 测试demo 当前线程 执行多次
  * @author : jiangzh
  * @program : com.imooc.hystrix.show.command
  * @description :
