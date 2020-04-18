@@ -16,7 +16,11 @@ import java.net.URISyntaxException;
 /**
  * ribbon是客户端负载均衡器
  * 核心功能
- *  一 服务发现 二 服务选择规则 三 服务监听
+ *  一 服务发现（ServerList） 二 服务选择规则（IRule） 三 服务监听 （IPing）
+ *  局部 》全局 》默认   有效范围
+ *  默认配置都在 DefaultClientConfigImpl
+ *  如果服务地址不是从eureka获取 建议配置IPing
+ *
  *
  * @author : jiangzh
  * @program : com.mooc.meetingfilm.consumer.ribbon

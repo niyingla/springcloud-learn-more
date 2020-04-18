@@ -39,7 +39,12 @@ public class RestConfig {
 
     @Bean
     public IPing iPing(){
+        //检测服务状态 访问路径 服务 + /abc 失败后从UpServerList删除实例
+        // isSecure 是否是安全连接 http 还是 https
+        // pingAppendString 具体路径
 //        return new PingUrl(false,"/abc");
+
+        //NIWSDiscoveryPing 依赖Eureka 判断
         return new NIWSDiscoveryPing();
     }
 

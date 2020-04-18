@@ -10,10 +10,11 @@ spring:
   application:
     name: hello-service-consumer
 
-
+#全局配置 最大重试次数
 ribbon:
   MaxAutoRetries : 3
 
+#单个服务配置 最大重试次数
 hello-service-provider:
   ribbon:
     MaxAutoRetries : 3
