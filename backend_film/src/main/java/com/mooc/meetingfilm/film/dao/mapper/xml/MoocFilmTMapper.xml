@@ -35,6 +35,8 @@
         LEFT JOIN mooc_film_info_t info ON film.`UUID` = info.`film_id`
     </select>
 
+    <!-- GROUP_CONCAT(role_name SEPARATOR ',') 字段累加-->
+    <!-- REPLACE(TRIM(BOTH '#' FROM film.film_cats),"#",",") 所有的# film_cats中的 # 转成 , -->
     <select id="descrbeFilmById" resultType="com.mooc.meetingfilm.apis.film.vo.DescribeFilmRespVO">
         SELECT
          film.`UUID` AS filmId,

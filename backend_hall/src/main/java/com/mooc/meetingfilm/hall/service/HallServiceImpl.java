@@ -99,6 +99,7 @@ public class HallServiceImpl implements HallServiceAPI{
     private MoocHallFilmInfoT describeFilmInfo(String filmId) throws CommonServiceException{
         // 解析返回值
         BaseResponseVO<DescribeFilmRespVO> baseResponseVO = filmFeignApi.describeFilmById(filmId);
+        //得到电影信息
         DescribeFilmRespVO filmResult = baseResponseVO.getData();
         if(filmResult ==null || ToolUtils.strIsNull(filmResult.getFilmId())){
             throw new CommonServiceException(404,"抱歉，未能找到对应的电影信息，filmId : "+filmId);

@@ -81,7 +81,7 @@ public class FilmController {
 
     }
 
-    // 根据电影编号获取电影信息
+    // 保存电影信息
     @RequestMapping(value = "/film:add",method = RequestMethod.POST)
     public BaseResponseVO saveFilmInfo(@RequestBody FilmSavedReqVO filmSavedReqVO) throws CommonServiceException {
 

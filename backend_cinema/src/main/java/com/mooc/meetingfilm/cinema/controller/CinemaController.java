@@ -31,6 +31,12 @@ public class CinemaController {
     @Autowired
     private CinemaServiceAPI cinemaServiceAPI;
 
+    /**
+     * 保存影院
+     * @param cinemaSavedReqVO
+     * @return
+     * @throws CommonServiceException
+     */
     @RequestMapping(value = "/cinema:add",method = RequestMethod.POST)
     public BaseResponseVO saveCinema(@RequestBody CinemaSavedReqVO cinemaSavedReqVO) throws CommonServiceException {
 
@@ -60,6 +66,12 @@ public class CinemaController {
         return BaseResponseVO.success();
     }
 
+    /**
+     * 获取影院列表
+     * @param basePageVO
+     * @return
+     * @throws CommonServiceException
+     */
     @HystrixCommand(fallbackMethod = "fallbackMethod",
         commandProperties = {
                 @HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
