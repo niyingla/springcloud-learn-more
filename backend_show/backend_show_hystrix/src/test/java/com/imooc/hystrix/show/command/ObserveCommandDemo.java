@@ -23,7 +23,7 @@ public class ObserveCommandDemo extends HystrixObservableCommand<String> {
         super(Setter
                 //分组取个名字
                 .withGroupKey(HystrixCommandGroupKey.Factory.asKey("ObserveCommandDemo"))
-                //command取个名字
+                //command取个名字 默认反射类名
                 .andCommandKey(HystrixCommandKey.Factory.asKey("ObserveCommandKey")));
         this.name = name;
     }

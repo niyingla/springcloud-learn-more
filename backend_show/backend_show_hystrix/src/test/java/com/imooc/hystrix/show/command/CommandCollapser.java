@@ -24,6 +24,7 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
                         .withTimerDelayInMilliseconds(1000)
                 )
         );
+        //设置请求id
         this.id = id;
     }
     /**
@@ -50,7 +51,7 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
 
     /**
     * @Description: 批量处理结果与请求业务之间映射关系处理
-    * @Param: [strings, collection]
+    * @Param: [strings 结果列表, collection 请求集合]
     * @return: void
     * @Author: jiangzh
     */
@@ -58,7 +59,9 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
     protected void mapResponseToRequests(List<String> strings, Collection<CollapsedRequest<String, Integer>> collection) {
         int counts = 0;
         Iterator<HystrixCollapser.CollapsedRequest<String, Integer>> iterator = collection.iterator();
+        //循环响应请求
         while (iterator.hasNext()) {
+            //迭代返回结果
             HystrixCollapser.CollapsedRequest<String, Integer> response = iterator.next();
 
             String result = strings.get(counts++);
@@ -69,8 +72,14 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
 }
 
 
+/**
+ * 创建批量请求
+ */
 class BatchCommand extends HystrixCommand<List<String>>{
 
+    /**
+     * 设置请求listRequest为入参
+     */
     private Collection<HystrixCollapser.CollapsedRequest<String, Integer>> collection;
 
     public BatchCommand(Collection<HystrixCollapser.CollapsedRequest<String, Integer>> collection){
@@ -83,7 +92,9 @@ class BatchCommand extends HystrixCommand<List<String>>{
         System.err.println("currentThread : "+Thread.currentThread().getName());
         List<String> result = Lists.newArrayList();
 
+        //循环批量请求
         Iterator<HystrixCollapser.CollapsedRequest<String, Integer>> iterator = collection.iterator();
+        //挨个处理业务逻辑
         while (iterator.hasNext()) {
             HystrixCollapser.CollapsedRequest<String, Integer> request = iterator.next();
 
@@ -92,7 +103,7 @@ class BatchCommand extends HystrixCommand<List<String>>{
             // 具体业务逻辑
             result.add("Mooc req: "+ reqParam);
         }
-
+        //响应结果数组
         return result;
     }
 }

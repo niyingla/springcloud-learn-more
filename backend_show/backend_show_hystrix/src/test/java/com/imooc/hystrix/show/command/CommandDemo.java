@@ -16,11 +16,11 @@ public class CommandDemo extends HystrixCommand<String> {
 
     public CommandDemo(String name){
         super(Setter
+                //groupKey 分组监控和报警也是线程池默认名称
                 .withGroupKey(HystrixCommandGroupKey.Factory.asKey("CommandHelloWorld"))
-                .andCommandPropertiesDefaults(
-                        HystrixCommandProperties.defaultSetter()
-                            .withRequestCacheEnabled(false) // 请求缓存开关)
-                                // 切换线程池隔离还是信号量隔离
+                .andCommandPropertiesDefaults(HystrixCommandProperties.defaultSetter()
+                        .withRequestCacheEnabled(false) // 请求缓存开关)
+                        // 切换线程池隔离还是信号量隔离
                         .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.SEMAPHORE)
                         .withExecutionIsolationSemaphoreMaxConcurrentRequests(2)
 //                        .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
@@ -78,6 +78,10 @@ public class CommandDemo extends HystrixCommand<String> {
     }
 
 
+    /**
+     * 复写当前方法  造成相同name获得相同缓存key 触发缓存
+     * @return
+     */
     @Override
     protected String getCacheKey() {
         return String.valueOf(name);

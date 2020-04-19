@@ -145,7 +145,7 @@ public class CommandTest {
      */
     @Test
     public void requestCache(){
-        // 开启请求上下文
+        // 开启请求上下文 然后覆写getCacheKey
         HystrixRequestContext requestContext = HystrixRequestContext.initializeContext();
         long beginTime = System.currentTimeMillis();
 

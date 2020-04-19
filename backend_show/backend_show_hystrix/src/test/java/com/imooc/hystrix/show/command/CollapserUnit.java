@@ -15,6 +15,7 @@ public class CollapserUnit {
 
     @Test
     public void collapserTest() throws ExecutionException, InterruptedException {
+        //请求缓存和请求合并都需要开启上下文
         HystrixRequestContext context = HystrixRequestContext.initializeContext();
 
         // 构建请求 -> 主要优化点，多个服务调用的多次HTTP请求合并
