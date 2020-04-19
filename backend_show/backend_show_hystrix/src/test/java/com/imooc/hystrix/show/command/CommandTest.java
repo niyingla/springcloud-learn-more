@@ -17,6 +17,9 @@ import java.util.concurrent.Future;
 
 public class CommandTest {
 
+    /**
+     * 测试普通执行
+     */
     @Test
     public void executeTest(){
         long beginTime = System.currentTimeMillis();
@@ -30,7 +33,9 @@ public class CommandTest {
         System.out.println("result="+result+" , speeding="+(endTime-beginTime));
     }
 
-
+    /**
+     * 测试异步执行
+     */
     @Test
     public void queueTest() throws ExecutionException, InterruptedException {
         long beginTime = System.currentTimeMillis();
@@ -116,8 +121,8 @@ public class CommandTest {
         Observable<String> toObservable2 = commandDemo2.toObservable();
         // 非阻塞式调用
         toObservable2.subscribe(new Subscriber<String>() {
-                @Override
-                public void onCompleted() {
+            @Override
+            public void onCompleted() {
                 System.err.println("toObservable , onCompleted");
             }
 

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * HystrixCollapser 合并请求处理类  HystrixCommand 处理类
  * 一旦满足合并时间窗口周期大小，Hystrix会进行一次批量提交，进行一次依赖服务的调用（减少握手次数），
  * 通过充写HystrixCollapser父类的mapResponseToRequests方法，将批量返回的请求分发到具体的每次请求中。
  * 优点 降低多次服务间http请求握手时间
@@ -46,7 +47,7 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
     /**
     * @Description: 批量业务处理
     * @Param: [collection]
-    * @return: com.netflix.hystrix.HystrixCommand<java.util.List<java.lang.String>>
+    * @return: com.netflix.hystrix.HystrixCommand<java.util.List<java.lang.String>> 合并请求列表
     * @Author: jiangzh
     */
     @Override
@@ -68,7 +69,7 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
         while (iterator.hasNext()) {
             //迭代返回结果
             HystrixCollapser.CollapsedRequest<String, Integer> response = iterator.next();
-
+            //
             String result = strings.get(counts++);
 
             response.setResponse(result);
@@ -87,11 +88,20 @@ class BatchCommand extends HystrixCommand<List<String>>{
      */
     private Collection<HystrixCollapser.CollapsedRequest<String, Integer>> collection;
 
+    /**
+     * 初始化对象
+     * @param collection
+     */
     public BatchCommand(Collection<HystrixCollapser.CollapsedRequest<String, Integer>> collection){
         super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("BatchCommand")));
         this.collection = collection;
     }
 
+    /**
+     * 批量执行获得结果
+     * @return
+     * @throws Exception
+     */
     @Override
     protected List<String> run() throws Exception {
         //每次执行请求打印
