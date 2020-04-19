@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
+ * qps 来设置线程数 假如100ms每个请求 100 qps = 10 线程 /  0.1 然后冗余0.3-0.5
+ * 0.4+1（10）= 14 线程 队列长度设置在线程的 0.5-1之间
+ * HystrixBadRequestException 不会触发fallback
  * @author : jiangzh
  * @program : com.mooc.meetingfilm.cinema.controller
  * @description : 影院模块表现层
