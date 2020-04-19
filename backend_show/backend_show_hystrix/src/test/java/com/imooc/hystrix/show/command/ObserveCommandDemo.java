@@ -47,4 +47,15 @@ public class ObserveCommandDemo extends HystrixObservableCommand<String> {
             //进行io处理
         }).subscribeOn(Schedulers.io());
     }
+
+    /**
+     * 降级方法
+     */
+//    @Override
+//    public Observable<String> resumeWithFallback() {
+//        String result = "Fallback name : " + name;
+//
+//        System.err.println(result + " , currentThread-" + Thread.currentThread().getName());
+//        return result;
+//    }
 }

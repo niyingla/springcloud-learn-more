@@ -50,16 +50,17 @@ public class CommandDemo extends HystrixCommand<String> {
 
 
     /**
-    * @Description: 0个影片信息
-    * @Param: []
-    * @return: java.lang.String
-    * @Author: jiangzh
-    */
+     * 降级方法 失败后执行
+     * @Description: 0个影片信息
+     * @Param: []
+     * @return: java.lang.String
+     * @Author: jiangzh
+     */
     @Override
     protected String getFallback() {
-        String result = "Fallback name : "+ name;
+        String result = "Fallback name : " + name;
 
-        System.err.println(result+" , currentThread-"+Thread.currentThread().getName());
+        System.err.println(result + " , currentThread-" + Thread.currentThread().getName());
 
         return result;
     }
