@@ -21,7 +21,8 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
                 .withCollapserKey(HystrixCollapserKey.Factory.asKey("CommandCollapser"))
                 .andCollapserPropertiesDefaults(
                         HystrixCollapserProperties.defaultSetter()
-                        .withTimerDelayInMilliseconds(1000)
+                                //超时时间 批处理创建到处理的毫秒数
+                                .withTimerDelayInMilliseconds(1000)
                 )
         );
         //设置请求id
@@ -89,6 +90,7 @@ class BatchCommand extends HystrixCommand<List<String>>{
 
     @Override
     protected List<String> run() throws Exception {
+        //每次执行请求打印
         System.err.println("currentThread : "+Thread.currentThread().getName());
         List<String> result = Lists.newArrayList();
 
