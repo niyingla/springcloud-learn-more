@@ -67,7 +67,7 @@ public class CinemaController {
     }
 
     /**
-     * 获取影院列表
+     * 获取影院列表 默认熔断器开启5s后进入半开起
      * @param basePageVO
      * @return
      * @throws CommonServiceException
