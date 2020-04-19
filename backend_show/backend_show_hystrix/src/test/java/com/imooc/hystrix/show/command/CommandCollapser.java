@@ -8,6 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * 一旦满足合并时间窗口周期大小，Hystrix会进行一次批量提交，进行一次依赖服务的调用（减少握手次数），
+ * 通过充写HystrixCollapser父类的mapResponseToRequests方法，将批量返回的请求分发到具体的每次请求中。
+ * 优点 降低多次服务间http请求握手时间
+ * 缺点 但是很少有机会时间足够近内产生多次http请求
  * @author : jiangzh
  * @program : com.imooc.hystrix.show.command
  * @description : 请求合并处理对象

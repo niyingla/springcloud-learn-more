@@ -5,6 +5,10 @@ import lombok.Data;
 
 /**
  * Command 测试demo 隔离线程 执行一次
+ * 隔离模式
+ * THREAD 线程（新的线程执行业务） 通过设置线程池大小来控制并发访问量，
+ * 当线程饱和的时候可以拒绝服务，防止依赖问题扩散,服务间调用推荐线程隔离
+ * SEMAPHORE 信号量（简单理解为计数器 当前线程直接执行业务）推荐内部隔离
  * @author : jiangzh
  * @program : com.imooc.hystrix.show.command
  * @description :
@@ -22,11 +26,13 @@ public class CommandDemo extends HystrixCommand<String> {
                         .withRequestCacheEnabled(false) // 请求缓存开关)
                         // 切换线程池隔离还是信号量隔离
                         .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.SEMAPHORE)
+                        //信号量最大值
                         .withExecutionIsolationSemaphoreMaxConcurrentRequests(2)
 //                        .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
                         // .withCircuitBreakerForceOpen(true) // 强制开启熔断器
                         .withCircuitBreakerRequestVolumeThreshold(2) // 单位时间内的请求阈值
                         .withCircuitBreakerErrorThresholdPercentage(50) // 当满足请求阈值时，超过50%则开启熔断
+        //设置线程池名字
         ).andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("MyThreadPool"))
 //         .andThreadPoolPropertiesDefaults(
 //                 HystrixThreadPoolProperties.defaultSetter()
