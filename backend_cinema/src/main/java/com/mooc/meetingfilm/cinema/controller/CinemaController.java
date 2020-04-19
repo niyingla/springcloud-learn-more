@@ -72,7 +72,8 @@ public class CinemaController {
      * @return
      * @throws CommonServiceException
      */
-    @HystrixCommand(fallbackMethod = "fallbackMethod",
+    @HystrixCommand(fallbackMethod = "fallbackMethod", //开始失败方法
+        //命令配置
         commandProperties = {
                 //隔离级别
                 @HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
@@ -83,17 +84,22 @@ public class CinemaController {
                 //错误百分比 达到后开启熔断
                 @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50")
         },
+        //线程池配置
         threadPoolProperties = {
                 //核心线程数
                 @HystrixProperty(name = "coreSize", value = "1"),
                 //最大线程数
                 @HystrixProperty(name = "maxQueueSize", value = "10"),
-                //
+                //线程存活时间
                 @HystrixProperty(name = "keepAliveTimeMinutes", value = "1000"),
+                //来动态控制线程池队列的上限，而线程池本身队列的大小，则是由maxQueueSize属性来决定，
+                //默认为-1，创建的队列是SynchronousQueue，如果设置大于0则根据其大小创建
                 @HystrixProperty(name = "queueSizeRejectionThreshold", value = "8"),
+                //
                 @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),
+                //
                 @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1500")
-    },ignoreExceptions = CommonServiceException.class)
+    },ignoreExceptions = CommonServiceException.class) //不执行降级的Exception 比如业务异常
     @RequestMapping(value = "",method = RequestMethod.GET)
     public BaseResponseVO describeCinemas(BasePageVO basePageVO) throws CommonServiceException {
 
