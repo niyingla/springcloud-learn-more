@@ -74,14 +74,21 @@ public class CinemaController {
      */
     @HystrixCommand(fallbackMethod = "fallbackMethod",
         commandProperties = {
+                //隔离级别
                 @HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
+                //线程超时时间
                 @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value= "1000"),
+                //判断熔断的最少请求数，默认是10；只有在一个统计窗口内处理的请求数量达到这个阈值，才会进行熔断与否的判断
                 @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+                //错误百分比 达到后开启熔断
                 @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50")
         },
         threadPoolProperties = {
+                //核心线程数
                 @HystrixProperty(name = "coreSize", value = "1"),
+                //最大线程数
                 @HystrixProperty(name = "maxQueueSize", value = "10"),
+                //
                 @HystrixProperty(name = "keepAliveTimeMinutes", value = "1000"),
                 @HystrixProperty(name = "queueSizeRejectionThreshold", value = "8"),
                 @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),

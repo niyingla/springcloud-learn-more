@@ -26,8 +26,10 @@ public class CommandDemo extends HystrixCommand<String> {
                         .withRequestCacheEnabled(false) // 请求缓存开关)
                         // 切换线程池隔离还是信号量隔离
                         .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.SEMAPHORE)
-                        //信号量最大值
+                        //信号量最大请求值
                         .withExecutionIsolationSemaphoreMaxConcurrentRequests(2)
+                        //失败最大请求数
+                        .withFallbackIsolationSemaphoreMaxConcurrentRequests(10)
 //                        .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
                         // .withCircuitBreakerForceOpen(true) // 强制开启熔断器
                         .withCircuitBreakerRequestVolumeThreshold(2) // 单位时间内的请求阈值
@@ -36,9 +38,10 @@ public class CommandDemo extends HystrixCommand<String> {
         ).andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("MyThreadPool"))
 //         .andThreadPoolPropertiesDefaults(
 //                 HystrixThreadPoolProperties.defaultSetter()
-//                    .withCoreSize(2)
-//                    .withMaximumSize(3).withAllowMaximumSizeToDivergeFromCoreSize(true)
-//                    .withMaxQueueSize(2)
+//                    .withCoreSize(2) //核心线程数
+//                    .withMaximumSize(3) //线程池最大数量
+//                    .withAllowMaximumSizeToDivergeFromCoreSize(true) //匹配上条配置 是否开启最大线程数
+//                    .withMaxQueueSize(2) //等待队列数量   等待时间+执行时间 执行完毕不能超出超时时间（默认 1s）
 //         )
         );
 
