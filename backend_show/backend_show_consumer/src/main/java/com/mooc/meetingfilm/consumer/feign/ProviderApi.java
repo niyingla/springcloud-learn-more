@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
         name = "hello-service-provider", //服务名 value也是取名
         primary = true, //多实现时设置优先级
         path = "/provider", //统一路径
-        fallbackFactory = FallbackFactory.class //失败方法
-//        fallback = ProviderFallbackAPIImpl.class
+        fallbackFactory = FallbackFactory.class //失败工厂方法
+//        fallback = ProviderFallbackAPIImpl.class //失败方法
 //        configuration = FeignHelloConf.class,//自定义feign配置
 //        url = "http://localhost:7101"  //指定服务路径 默认从ribbon拿
  )
