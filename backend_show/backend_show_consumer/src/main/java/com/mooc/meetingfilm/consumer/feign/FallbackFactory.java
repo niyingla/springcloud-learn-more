@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class FallbackFactory implements feign.hystrix.FallbackFactory {
 
+    /**
+     * 实现接口方法
+     * @param throwable
+     * @return
+     */
     @Override
     public ProviderApi create(Throwable throwable) {
-        return new ProviderApi() {
-            @Override
-            public String invokerProviderController(String message) {
-                return "invokerProviderController FallbackFactory message="+message;
-            }
-        };
+        return message -> "invokerProviderController FallbackFactory message="+message;
     }
 
 }
