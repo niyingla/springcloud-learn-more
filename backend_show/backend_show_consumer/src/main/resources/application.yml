@@ -20,18 +20,23 @@ hello-service-provider:
     MaxAutoRetries : 3
 
 feign:
+  #开启hystrix
   hystrix:
     enabled: true
   httpclient:
     enabled: true
   compression:
     request:
+      #求和响应GZIP压缩支持
       enabled: true
+      #支持压缩的mime types
       mime-types: text/xml,application/xml,application/json
-      min-request-size: 2048
+      min-request-size: 2048 #开启压缩的最大size
+      #开启压缩
     response:
       enabled: true
 
+#配置日志
 logging:
   config: classpath:logback.xml
 
