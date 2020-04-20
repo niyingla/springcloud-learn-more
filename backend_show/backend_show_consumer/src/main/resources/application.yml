@@ -23,9 +23,10 @@ feign:
   #开启hystrix
   hystrix:
     enabled: true
+    #开启feign-httpclient 建议开启 有效提高并发
   httpclient:
     enabled: true
-  compression:
+  compression: #太小的数据 压缩不值
     request:
       #求和响应GZIP压缩支持
       enabled: true

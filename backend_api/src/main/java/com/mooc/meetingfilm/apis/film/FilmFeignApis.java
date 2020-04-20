@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * @author : jiangzh
  * @program : com.mooc.meetingfilm.apis.film
- * @description : Film提供的公共接口服务
+ * @description : Film提供的公共接口服务 需要用的时候继承一下此类
  **/
 public interface FilmFeignApis {
 
