@@ -17,7 +17,7 @@ import java.io.InputStream;
 /**
  * @author : jiangzh
  * @program : com.mooc.meetingfilm.apigwzuul
- * @description : 业务降级处理
+ * @description : zuul业务降级处理
  **/
 // @Component
 public class MyFallback implements FallbackProvider {
@@ -63,20 +63,22 @@ public class MyFallback implements FallbackProvider {
             }
 
             /**
-            * @Description: 业务降级处理方式
+            * @Description: 业务降级处理方式 返回响应内容
             * @Param: []
             * @return: java.io.InputStream
             * @Author: jiangzh
             */
             @Override
             public InputStream getBody() throws IOException {
-                BaseResponseVO responseVO
-                        = BaseResponseVO.serviceException(
-                        new CommonServiceException(404, "No Films!~"));
+                BaseResponseVO responseVO = BaseResponseVO.serviceException(new CommonServiceException(404, "No Films!~"));
                 String result = JSONObject.toJSONString(responseVO);
                 return new ByteArrayInputStream(result.getBytes());
             }
 
+            /**
+             * 设置返回的请求头
+             * @return
+             */
             @Override
             public HttpHeaders getHeaders() {
                 HttpHeaders headers = new HttpHeaders();

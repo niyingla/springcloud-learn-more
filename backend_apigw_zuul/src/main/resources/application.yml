@@ -40,7 +40,9 @@ hystrix:
     default:
       execution:
         timeout:
+          #开启超时
           enabled: true
+          #设置超时时间
         isolation:
           thread:
             timeoutInMilliseconds: 10000
