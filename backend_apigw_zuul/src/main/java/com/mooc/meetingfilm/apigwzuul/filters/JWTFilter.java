@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * RequestContext 线程安全 保证请求安全
+ * filter 分三大类 前置（例 鉴权） 路由中（例 业务） 后置（例 增强）
  * @author : jiangzh
  * @program : com.mooc.meetingfilm.apigwzuul.filters
  * @description :

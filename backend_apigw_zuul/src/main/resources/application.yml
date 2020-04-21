@@ -27,7 +27,7 @@ zuul:
       serviceId: hall-service
       retryable: true
 
-#  routes:  ## 路由规则
+#  routes:  ## 路由规则 path后面 路由表达式 ? 单个字符 * 任意数量字符 ** 任意数量字符及目录
 #    film-service:    ## application.name -> 服务名称 service-id
 #     path: /filmapi/**  # 匹配规则
 #    cinema-service:
