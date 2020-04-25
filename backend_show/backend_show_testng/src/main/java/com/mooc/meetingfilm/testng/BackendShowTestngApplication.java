@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *  创建名字为火华一号 版本为1.0的docker文件
  *  docker run -itd -p 8080:8761 火华一号:1.0
  *  //后台运行这个镜像 镜像8761端口映射到本机8080
+ *  docker ps -a //查看已经运行的docker容器列表
+ *  docker stop <container-id>
  */
 @SpringBootApplication
 public class BackendShowTestngApplication {
