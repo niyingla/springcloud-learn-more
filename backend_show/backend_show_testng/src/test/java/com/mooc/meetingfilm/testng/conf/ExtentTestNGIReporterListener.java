@@ -13,12 +13,16 @@ import org.testng.xml.XmlSuite;
 import java.io.File;
 import java.util.*;
 
+/**
+ * 测试结果监听类
+ */
 public class ExtentTestNGIReporterListener implements IReporter {
     //生成的路径以及文件名
     private static final String OUTPUT_FOLDER = "report/";
+    //测试结果输出文件名
     private static final String FILE_NAME = "index.html";
-
-    private static final String REPORT_NAME = "蒋征的测试报告";
+    //报告名称
+    private static final String REPORT_NAME = "火华的测试报告";
 
     private ExtentReports extent;
 

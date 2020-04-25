@@ -23,6 +23,9 @@ import java.util.List;
 public class FilmsTest {
 
 
+    /**
+     * 测试数据创建
+     */
     @Test
     public void addFilm(){
         String url = "http://localhost:8401/films/film:add";
@@ -61,12 +64,16 @@ public class FilmsTest {
     }
 
 
-    @Test(dataProvider = "filmsDataProvider")
+    /**
+     *
+     * @param filmsName
+     * @param expectCounts
+     */
+    @Test(dataProvider = "filmsDataProvider")//指定数据提供者
     public void films(String filmsName, int expectCounts) {
         String uri = "http://localhost:8401/films";
         RestTemplate restTemplate = RestUtils.getRestTemplate();
-        String response
-                = restTemplate.getForObject(uri, String.class);
+        String response = restTemplate.getForObject(uri, String.class);
         log.info("response : {}", response);
         JSONObject result = JSONObject.parseObject(response);
         // 数量是否大于1
@@ -78,7 +85,9 @@ public class FilmsTest {
         // 成功计数器
         int count = 0;
 
+        //查询出列表
         List<DescribeFilmsRespVO> describeFilmsRespVOS = films.toJavaList(DescribeFilmsRespVO.class);
+        //计数当前
         for(DescribeFilmsRespVO vo : describeFilmsRespVOS){
             if(vo.getFilmEnName().equals(filmsName)){
                 count ++ ;
@@ -86,14 +95,21 @@ public class FilmsTest {
         }
 
         log.info("count : {}", count);
+        //判断数据是否插入成功
         Assert.assertEquals(count, expectCounts);
     }
 
 
+    /**
+     * 提供测试数据
+     * @return
+     */
     @DataProvider(name = "filmsDataProvider")
     public Object[][] filmsDataProvider(){
         Object[][] objects = new Object[][]{
+                //第一次执行测试的数据
                 {"SpringCloud", 1},
+                //第二次执行测试的数据
                 {"SpringCloud2", 0}
         };
 

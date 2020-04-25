@@ -32,7 +32,8 @@ zuul:
 #     path: /filmapi/**  # 匹配规则
 #    cinema-service:
 #      path: /cinemaapi/**
-#  sensitive-headers: "imooc"   ## zuul默认会过滤一些头信息，需要进行过滤设置
+#  sensitive-headers: "imooc"   ## zuul默认会过滤一些头信息，需要进行过滤设置 需要的字段写在这里
+# 相反 ignored-headers 忽略字段写在这里
 
 
 hystrix:

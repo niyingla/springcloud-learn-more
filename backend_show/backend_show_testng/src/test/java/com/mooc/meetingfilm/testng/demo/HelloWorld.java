@@ -21,11 +21,17 @@ public class HelloWorld {
         log.error("this is test02!");
     }
 
+    /**
+     * 方法之前 每次都执行
+     */
     @BeforeMethod
     public void beforemethod(){
         log.info("this is beforemethod test!");
     }
 
+    /**
+     * 方法之后 每次都执行
+     */
     @AfterMethod
     public void aftermethod(){
         log.info("this is aftermethod test!");
@@ -41,11 +47,17 @@ public class HelloWorld {
         log.info("this is afterclass test!");
     }
 
+    /**
+     * 套件前置
+     */
     @BeforeSuite
     public void beforesuite(){
         log.info("this is beforesuite test!");
     }
 
+    /**
+     * 套件后置
+     */
     @AfterSuite
     public void aftersutie(){
         log.info("this is aftersutie test!");
