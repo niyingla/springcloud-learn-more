@@ -65,7 +65,7 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
     protected void mapResponseToRequests(List<String> strings, Collection<CollapsedRequest<String, Integer>> collection) {
         int counts = 0;
         Iterator<HystrixCollapser.CollapsedRequest<String, Integer>> iterator = collection.iterator();
-        //和并请求  返回后逐个响应
+        //和并请求  返回后逐个响应 减少网络消耗资源
         while (iterator.hasNext()) {
             HystrixCollapser.CollapsedRequest<String, Integer> response = iterator.next();
             String result = strings.get(counts++);
