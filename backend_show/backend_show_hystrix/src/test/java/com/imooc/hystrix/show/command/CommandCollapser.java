@@ -65,11 +65,9 @@ public class CommandCollapser extends HystrixCollapser<List<String>, String , In
     protected void mapResponseToRequests(List<String> strings, Collection<CollapsedRequest<String, Integer>> collection) {
         int counts = 0;
         Iterator<HystrixCollapser.CollapsedRequest<String, Integer>> iterator = collection.iterator();
-        //循环响应请求
+        //和并请求  返回后逐个响应
         while (iterator.hasNext()) {
-            //迭代返回结果
             HystrixCollapser.CollapsedRequest<String, Integer> response = iterator.next();
-            //
             String result = strings.get(counts++);
 
             response.setResponse(result);
